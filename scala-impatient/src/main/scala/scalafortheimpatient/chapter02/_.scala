@@ -1,4 +1,4 @@
-package scalafortheimpatient.chapter2
+package scalafortheimpatient.chapter02
 
 /**
  * @author Wei Xing
