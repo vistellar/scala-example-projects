@@ -24,15 +24,18 @@ class MyServiceActor extends Actor with MyService {
 trait MyService extends HttpService {
 
   val myRoute =
-    path("") {
-      get {
-        respondWithMediaType(`text/html`) { // XML is marshalled to `text/xml` by default, so we simply override here
-          complete {
-            <html>
-              <body>
-                <h1>Say hello to <i>spray-routing</i> on <i>Jetty</i>!</h1>
-              </body>
-            </html>
+    pathPrefix("") {
+      compressResponse() {
+        getFromResourceDirectory("src/main/webapp")
+      }
+    } ~
+    pathPrefix("api") {
+      path("tasks") {
+        get {
+          respondWithMediaType(`application/json`) {
+            complete {
+
+            }
           }
         }
       }
